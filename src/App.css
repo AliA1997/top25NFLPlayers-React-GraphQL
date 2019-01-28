@@ -1,28 +1,71 @@
+body, html {
+  height: 100vh;
+  width: 100vw;
+}
+#root {
+  height: 100%;
+  width: 100%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+.pages {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+}
+.nav-div {
+  width: 15%;
+  height: 100%;
+}
+.open-drawer {
+  align-self: center;
+  border-radius: 10%;
+  width: 100%;
+  font-size: 20px;
+  transition: background-color 2s infinite;
+}
+.navigation-bar {
+  background: green;
+  color: black;
+  display: flex;
+  flex-direction: column !important;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+.link {
+  color: #fff;
+  display: flex;
+  justify-content: column;
+  font-size: 20px;
+  width: 100%;
+  padding: 30px;
+  cursor: pointer;
+  text-decoration: none;
+  /* transition: background-color 2s infinite; */
+}
+.link:hover {
+  background: #fff;
+  color: green;
+  text-decoration: none;
+
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.players-container {
+  background-color: lightgray;
+  height: 600px;
+  width: 100%;
+  overflow: auto;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.player-container {
+  padding-left: 20px;
+  border: 2px dashed black;
 }
