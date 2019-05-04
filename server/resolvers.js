@@ -9,7 +9,19 @@ const resolvers = {
             //If there is an errror retrieving data, and throw error on graphql playground.
             if(err) throw new Error(err);
             return players;
-        })
+        }),
+        //Use an id to get the specified player
+        getPlayer: (_, args) => {
+            //Make your callback asynchronous to return the player once it's data is retrieved.
+            return Player.findById({_id: args.id}, async (error, playerToReturn) => {
+                if(error) {
+                    console.log('Get Player Error-------', error);
+                    throw new Error(error);
+                }
+                //Return the specified player you would like to return.
+                return await playerToReturn;
+            })
+        }
     },
     Mutation: {
         //THe callback for mutation resolvers has obj, context, args, and info arguments. 
@@ -28,6 +40,33 @@ const resolvers = {
             newPlayer.save();
 
             return null;
+        },
+        //You will use your arguments such as name, position, team, jerseyNumber, and wonSuperBowl to update a
+        //player given thier id
+        updatePlayer: (_, args) => {
+            //Find the by player based on it's id.
+            //Make your method in mongoose asynchronous since your player to return when it retrieve the data
+            return Player.findByIdAndUpdate({_id: args.id}, {$set: args}, async (error, updatedPlayer) => {
+                if(error) {
+                    //If there is an error throw an error in yoru graphql console.
+                    throw new Error(error);
+                }
+                //Then return the updatedPlayer.
+                return await updatedPlayer;
+            });
+        },
+        //You will use your id argument to delete a player using an id.
+        deletePlayer: (_, args) => {
+            //Find your player based on it's id, and delete it.
+            //Have your callback asynchronous so your can return your deletePlayer once you recieve the data.
+            return Player.findByIdAndDelete({_id: args.id}, async (error, deletedPlayer) => {
+                if(error) {
+                    throw new Error(error);
+                }
+                console.log('deletedPlayer-------', deletedPlayer);
+                //THen return the delete player.
+                return await deletedPlayer;
+            });
         }
     }
 }

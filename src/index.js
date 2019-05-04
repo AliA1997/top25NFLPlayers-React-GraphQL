@@ -15,7 +15,9 @@ const client = new ApolloClient({
     //Define your cache by passing a new instance of InMemoryCache to your cache key.
     cache: new InMemoryCache(),
     //Define your link which will be set to a http link.
-    link: new HttpLink({uri: 'http://localhost:5000/graphql'})
+    //useGETForQueries for making your requests more developer friendly. Since we don't want to use post requests 
+    //except the case of authentication where we are giving a user authorization which in this case we are not doing.
+    link: new HttpLink({uri: 'http://localhost:5000/graphql', useGETForQueries: true})
 });
 //Nest your App with ApolloProvider with it's client prop set to the defined ApolloCLient.
 ReactDOM.render(<ApolloProvider client={client}><R><App /></R></ApolloProvider>, document.getElementById('root'));
